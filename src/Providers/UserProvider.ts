@@ -1,4 +1,9 @@
 import { Request, Response } from 'express';
-export function itsme (req:Request,res:Response){
-    res.json({message: 'its me mario'});
+import { PetModel } from '../Models';
+export async function itsme (req:Request,res:Response){
+    console.log(process.env.HOLI)
+    res.json({
+        error:false,
+        data: await PetModel.find({})
+    })
 }
