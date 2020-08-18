@@ -4,6 +4,10 @@ export interface IUser extends Document {
   lastname: string;
   email: string;
   password: string;
+  image:string;
+  xp:string;
+  level:string;
+  birthdate:string;
 }
 export interface TokenDecode {
   userId: string

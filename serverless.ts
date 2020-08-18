@@ -3,9 +3,6 @@ import { Serverless } from 'serverless/aws';
 const serverlessConfiguration: Serverless = {
   service: {
     name: 'meguabackendserverless',
-    // app and org for use with dashboard.serverless.com
-    // app: your-app-name,
-    // org: your-org-name,
   },
   org: "everacosta",
   app: 'meguaparkapi',
@@ -23,10 +20,12 @@ const serverlessConfiguration: Serverless = {
     runtime: 'nodejs12.x',
     apiGateway: {
       minimumCompressionSize: 1024,
+      binaryMediaTypes:['image/png','image/jpeg','image/jpg']
     },
-    // environment: {
-    //   AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-    // },
+    environment: {
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+    },
+    role:'arn:aws:iam::902923430347:role/meguaparkbackend'
   },
   functions: {
     hello: {

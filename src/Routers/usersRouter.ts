@@ -1,11 +1,16 @@
 
-import {itsme} from '../Providers/UserProvider'
-import express from 'express';
-let router = express.Router();
+//imports
+import {userProvider}  from '../Providers/UserProvider'
+import express, { Request, Response } from 'express';
+const {registerUser}= userProvider
 
-router.get('/me', async function(req, res) {
-    await itsme(req, res)
-  });
-let usersRouter= router
+//variables
+const usersRouter = express.Router();
+// Definicion de rutas
+usersRouter.post('/createUser', async (req:Request, res:Response) => {
+  await registerUser(req,res);
+});
 
+
+//Export Router
 export {usersRouter};

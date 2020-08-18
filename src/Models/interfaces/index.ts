@@ -1,2 +1,2 @@
-export * from './user'
-export * from './pet'
+export * from './IUser'
+export * from './IResponse'

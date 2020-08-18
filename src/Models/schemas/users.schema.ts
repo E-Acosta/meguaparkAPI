@@ -16,12 +16,19 @@ export const UsersSchema = new mongoose.Schema<IUser>(
         type: String,
         required:[true,'EMAIL_IS_REQUIRED'],
         trim:true,
-        unique:[true,'this email exists']
+        unique:[true,'THIS EMAIL IS IN USE']
     },
     password:{
         type:String,
         required:[true,'PASSWORD_IS_REQUIRED'],
         trim:true
+    },
+    image:{
+        type:String,
+        default:''
+    },
+    bithDate:{
+        type:Date
     }
 }
 )
