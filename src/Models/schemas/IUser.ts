@@ -1,5 +1,4 @@
-// import {mongoose} from '../../../../config'
-import mongoose from "../../../config/mongoose"
+import mongoose from "../../Config/mongo"
 import {IUser} from '../interfaces'
 export const UsersSchema = new mongoose.Schema<IUser>(
 {
@@ -27,7 +26,7 @@ export const UsersSchema = new mongoose.Schema<IUser>(
         type:String,
         default:''
     },
-    bithDate:{
+    birthdate:{
         type:Date
     }
 }

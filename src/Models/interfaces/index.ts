@@ -1,2 +1,2 @@
+export * from './IFile'
 export * from './IUser'
-export * from './IResponse'
