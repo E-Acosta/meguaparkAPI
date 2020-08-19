@@ -1,6 +1,5 @@
-import { IsString, IsOptional, IsEmail, IsNotEmpty, IsBase64, IsDateString } from 'class-validator';
-import {IUser} from '../interfaces';
-export class UserStructure {
+import { IsString, IsOptional, IsEmail, IsNotEmpty, IsDateString } from 'class-validator';
+export class User {
     @IsNotEmpty()
     @IsString()
     name: string
@@ -24,14 +23,5 @@ export class UserStructure {
     @IsDateString()
     @IsNotEmpty()
     birthdate:string
-    
-    constructor(data:IUser){
-        this.email=data.email
-        this.lastname=data.lastname
-        this.name=data.name
-        this.password=data.password
-        this.image=data.image
-        this.birthdate=data.birthdate
-    }
 
 }

@@ -7,7 +7,7 @@ export interface IUser extends Document {
   image:string;
   xp:string;
   level:string;
-  birthdate:string;
+  birthdate:Date;
 }
 export interface TokenDecode {
   userId: string
