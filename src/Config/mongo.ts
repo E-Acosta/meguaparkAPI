@@ -1,7 +1,6 @@
-import * as dotenv from "dotenv";
 import * as mongoose from "mongoose";
-dotenv.config();
-const {MONGOURI} = process.env
+import { configENV } from "./env";
+const {MONGOURI} = configENV
 mongoose.connect(`${MONGOURI}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

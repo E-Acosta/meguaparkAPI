@@ -1,22 +1,16 @@
 import { fileUploadOptions } from "../Config/multer";
 import { User } from "../Models/Structures/User";
-import { hashSync } from "bcrypt";
 import {
-  Param,
   Body,
   Post,
-  Put,
-  Delete,
   UploadedFile,
   JsonController,
+  Get,
+  Authorized,
+  CurrentUser,
 } from "routing-controllers";
-import { UserModel } from "../Models/Schemas";
-import { saveUser } from "../Providers/mongo";
-const hashSalt: number = 10;
-function parseDate(birthdate:string){
-  const date = new Date(birthdate);
-  return `${date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()}`;
-}
+import { login, saveUser } from "../Providers/UserProvider";
+import { ServerResponse } from "../Models/structures/Responses";
 @JsonController("/users")
 export class UserController {
   @Post("")
@@ -26,21 +20,20 @@ export class UserController {
   ) {
     console.dir(user);
     console.dir(file);
-    user = {
-      ...user,
-      ...{ image: file.location, password: hashSync(user.password, hashSalt),birthdate:parseDate(user.birthdate) },
-    };
-    const userModel = new UserModel(user);
-    return saveUser(userModel)
+    return saveUser(user, file);
   }
-
-  @Put("/:id")
-  put(@Param("id") id: number, @Body() user: any) {
-    return "Updating a user...";
+  @Post("/login")
+  login(@Body() body: { email: string; password: string }) {
+    return login(body.email, body.password);
   }
-
-  @Delete("/:id")
-  remove(@Param("id") id: number) {
-    return "Removing user...";
+  @Get("/me")
+  @Authorized()
+  userMe(@CurrentUser() user?:User) {
+    console.dir(user)
+    if (user) {
+      return new ServerResponse(false, user);
+    } else {
+      return new ServerResponse(true, "USER NOT EXITS");
+    }
   }
 }
