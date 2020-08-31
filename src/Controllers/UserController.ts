@@ -18,8 +18,6 @@ export class UserController {
     @Body({ validate: true }) user: User,
     @UploadedFile("profileImage", { options: fileUploadOptions }) file: any
   ) {
-    console.dir(user);
-    console.dir(file);
     return saveUser(user, file);
   }
   @Post("/login")
@@ -29,7 +27,6 @@ export class UserController {
   @Get("/me")
   @Authorized()
   userMe(@CurrentUser() user?:User) {
-    console.dir(user)
     if (user) {
       return new ServerResponse(false, user);
     } else {

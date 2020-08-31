@@ -8,16 +8,10 @@ export const isAuthorized = async (action: Action, roles: string[]) => {
   let authorization: string = action.request.headers["authorization"];
   if (authorization) {
     const token = authorization.split(' ')[1];
-    console.log(token)
     try {
       verify(token, configENV.SECRET_TOKEN);
-      console.log("FUNCIONO")
       return true;
     } catch (error) {
-      console.log("EL ERRORE")
-        console.log(token)
-        console.log(configENV.SECRET_TOKEN)
-        console.log(error)
       return false;
     }
   }else{
