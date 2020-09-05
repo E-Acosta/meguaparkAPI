@@ -1,12 +1,14 @@
 export class ServerResponse {
-    error:Boolean
+    code:Number
     data: BasicDataResponse|any
-    constructor (error:Boolean, data:BasicDataResponse|any){
-        this.error=error
+    message: String
+    constructor (code:Number,message:String, data?:BasicDataResponse|any){
+        this.code=code
+        this.message=message
         this.data=data
     }
+
 }
 class BasicDataResponse {
-    message?:String
     token?:String
 }

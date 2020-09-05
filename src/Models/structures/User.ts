@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsEmail, IsNotEmpty, IsDateString, IsMongoId } from 'class-validator';
+import { IsString, IsOptional, IsEmail, IsNotEmpty, /*IsDateString,*/ IsMongoId } from 'class-validator';
 import { IUser } from '../interfaces';
 export class User {
     @IsMongoId()
@@ -25,7 +25,7 @@ export class User {
     @IsOptional()
     image:string
 
-    @IsDateString()
+    // @IsDateString()
     @IsNotEmpty()
     birthdate:string
 

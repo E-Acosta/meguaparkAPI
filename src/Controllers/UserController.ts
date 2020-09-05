@@ -1,5 +1,5 @@
 import { fileUploadOptions } from "../Config/multer";
-import { User } from "../Models/Structures/User";
+import { User } from "../Models/structures/User";
 import {
   Body,
   Post,
@@ -8,6 +8,7 @@ import {
   Get,
   Authorized,
   CurrentUser,
+  Put,
 } from "routing-controllers";
 import { login, saveUser } from "../Providers/UserProvider";
 import { ServerResponse } from "../Models/structures/Responses";
@@ -28,9 +29,18 @@ export class UserController {
   @Authorized()
   userMe(@CurrentUser() user?:User) {
     if (user) {
-      return new ServerResponse(false, user);
+      return new ServerResponse(200,"Sucess", user);
     } else {
-      return new ServerResponse(true, "USER NOT EXITS");
+      return new ServerResponse(400, "USER NOT EXITS");
+    }
+  }
+  @Put("")
+  @Authorized()
+  updateUser(@CurrentUser() user?:User){
+    if (user) {
+      return new ServerResponse(200,"Sucess", user);
+    } else {
+      return new ServerResponse(400, "USER NOT EXITS");
     }
   }
 }
