@@ -5,8 +5,8 @@ export interface IUser extends Document {
   email: string;
   password: string;
   image:string;
-  xp:string;
-  level:string;
+  xp:number;
+  level:number;
   birthdate:Date;
 }
 export interface TokenDecode {
