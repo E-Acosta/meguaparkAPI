@@ -12,8 +12,8 @@ import {
 } from "routing-controllers";
 import { login, saveUser } from "../Providers/UserProvider";
 import { ServerResponse } from "../Models/structures/Responses";
-@JsonController("/users")
-export class UserController {
+@JsonController("/animals")
+export class AnimalController {
   @Post("")
   async createUser(
     @Body({ validate: true }) user: User,
