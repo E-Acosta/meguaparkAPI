@@ -1,12 +1,4 @@
-export async function saveUser(user: User, file: any) {
-    user = {
-      ...user,
-      ...{
-        image: undefined,
-        password: hashSync(user.password, hashSalt),
-        birthdate: parseDate(user.birthdate),
-      },
-    };
+export async function saveAnimal(user: User, file: any) {
     if (file) {
       user.image = file.location;
     }

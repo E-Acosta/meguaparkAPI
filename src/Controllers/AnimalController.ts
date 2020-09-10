@@ -15,9 +15,9 @@ import { ServerResponse } from "../Models/structures/Responses";
 @JsonController("/animals")
 export class AnimalController {
   @Post("")
-  async createUser(
+  async createAnimal(
     @Body({ validate: true }) user: User,
-    @UploadedFile("profileImage", { options: usersProfileMulterConfig }) file: any
+    @UploadedFile("profileImage", { options: usersProfileMulterConfig }) file:Express.Multer.File
   ) {
     return saveUser(user, file);
   }

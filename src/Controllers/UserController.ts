@@ -12,12 +12,14 @@ import {
 } from "routing-controllers";
 import { login, saveUser } from "../Providers/UserProvider";
 import { ServerResponse } from "../Models/structures/Responses";
+import { File } from "../Models/interfaces";
 @JsonController("/users")
 export class UserController {
   @Post("")
   async createUser(
     @Body({ validate: true }) user: User,
-    @UploadedFile("profileImage", { options: usersProfileMulterConfig }) file: any
+    @UploadedFile("profileImage", { options: usersProfileMulterConfig })
+    file: File
   ) {
     return saveUser(user, file);
   }
@@ -27,18 +29,18 @@ export class UserController {
   }
   @Get("/me")
   @Authorized()
-  userMe(@CurrentUser() user?:User) {
+  userMe(@CurrentUser() user?: User) {
     if (user) {
-      return new ServerResponse(200,"Sucess", user);
+      return new ServerResponse(200, "Sucess", user);
     } else {
       return new ServerResponse(400, "USER NOT EXITS");
     }
   }
   @Put("")
   @Authorized()
-  updateUser(@CurrentUser() user?:User){
+  updateUser(@CurrentUser() user?: User) {
     if (user) {
-      return new ServerResponse(200,"Sucess", user);
+      return new ServerResponse(200, "Sucess", user);
     } else {
       return new ServerResponse(400, "USER NOT EXITS");
     }
