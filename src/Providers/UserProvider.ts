@@ -18,9 +18,9 @@ export async function saveUser(user: User, file: File) {
     },
   };
   if (file) {
-    console.dir(user.image);
     user.image = file.location;
   }
+  console.dir(user)
   const userModel = new UserModel(user);
   return await userModel
     .save()
@@ -28,8 +28,12 @@ export async function saveUser(user: User, file: File) {
       return new ServerResponse(201, "User Registered");
     })
     .catch((error) => {
-      console.dir(error);
-      return new ServerResponse(500, `${error}`);
+      console.dir(error.message);
+      if (error.message.includes("email_1 dup key")) {
+        return new ServerResponse(406, `EMAIL EXITS`);
+      } else {
+        return new ServerResponse(500, `${error}`);
+      }
     });
 }
 export async function login(username: string, password: string) {
