@@ -13,7 +13,7 @@ export class AnimalImage {
     imagePath:string
     constructor(animalImage:IAnimalImage){
         if(animalImage){
-        this.id=animalImage._id.toString()
+        // this.id=animalImage._id.toString()
         this.imagePath=animalImage.imagePath
         }
     }
@@ -52,7 +52,7 @@ export class Animal {
     type: number
 
     @IsOptional()
-    images:AnimalImage[]
+    images:AnimalImage[]|[]
 
     constructor (animal:IAnimal){
         if(animal){

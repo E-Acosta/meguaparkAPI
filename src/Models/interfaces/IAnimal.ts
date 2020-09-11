@@ -9,7 +9,7 @@ export interface IAnimal extends Document {
     info:string;
     type:number;
     imagePath: string;
-    images:AnimalImage[];
+    images:AnimalImage[]|[];
 }
 export interface IAnimalImage extends Document {
     animalId: string; //
