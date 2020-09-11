@@ -24,10 +24,18 @@ export const UsersSchema = new mongoose.Schema<IUser>(
     },
     image:{
         type:String,
-        default:''
+        default:'https://meguapark.s3.amazonaws.com/profileImages/default.png'
     },
     birthdate:{
         type:Date
+    },
+    xp:{
+        type:Number,
+        default:0
+    },
+    level:{
+        type:Number,
+        default:0
     }
 }
 )
