@@ -1,4 +1,5 @@
 import { Document } from "mongoose";
+import { AnimalImage } from "../structures/Animal.dto";
 
 export interface IAnimal extends Document {
     name: string;
@@ -8,6 +9,7 @@ export interface IAnimal extends Document {
     info:string;
     type:number;
     imagePath: string;
+    images:AnimalImage[];
 }
 export interface IAnimalImage extends Document {
     animalId: string; //

@@ -1,8 +1,8 @@
 import mongoose from '../../Config/mongo'
-import { IAnimal } from '../interfaces/IAnimal'
+import { IAnimal, IAnimalImage } from '../interfaces/IAnimal'
 let {ObjectId} = mongoose.Schema.Types;
-export const AnimalSchema = new mongoose.Schema<IAnimal>({
-    bird: {
+export const AnimalImageSchema = new mongoose.Schema<IAnimal>({
+    animalId: {
         type: ObjectId,
         ref: "Animal",
         required: true,
@@ -12,4 +12,4 @@ export const AnimalSchema = new mongoose.Schema<IAnimal>({
         trim:true
     },
 })
-export const AnimalModel = mongoose.model<IAnimal>("Animal", AnimalSchema);
+export const AnimalImagesModel = mongoose.model<IAnimalImage>("AnimalImages", AnimalImageSchema);

@@ -1,20 +1,16 @@
 import { animalsProfileMulterConfig } from "../Config/multer";
-import { User } from "../Models/structures/User.dto";
 import {
   Body,
   Post,
   UploadedFile,
   JsonController,
   Get,
-  Authorized,
-  CurrentUser,
   Put,
 } from "routing-controllers";
 import { login } from "../Providers/UserProvider";
-import { ServerResponse } from "../Models/structures/Responses";
 import { File } from "../Models/interfaces";
-import { getAnimals, saveAnimal } from "../Providers/AnimalProvider";
-import { Animal } from "../Models/structures/Animal.dto";
+import { getAnimals, saveAnimal, saveAnimalImage } from "../Providers/AnimalProvider";
+import { Animal, AnimalImage } from "../Models/structures/Animal.dto";
 @JsonController("/animals")
 export class AnimalController {
   @Post("")
@@ -33,12 +29,10 @@ export class AnimalController {
     return getAnimals();
   }
   @Put("")
-  @Authorized()
-  updateUser(@CurrentUser() user?:User){
-    if (user) {
-      return new ServerResponse(200,"Sucess", user);
-    } else {
-      return new ServerResponse(400, "USER NOT EXITS");
-    }
+  async addImageAnimal(
+    @Body({ validate: true }) animalImage: AnimalImage,
+    @UploadedFile("image", { options: animalsProfileMulterConfig }) file:File
+  ) {
+    return saveAnimalImage(animalImage, file);
   }
 }
