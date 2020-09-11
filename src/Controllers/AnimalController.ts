@@ -11,8 +11,9 @@ import { login } from "../Providers/UserProvider";
 import { File } from "../Models/interfaces";
 import { getAnimals, getAnimalsLinked, linkAnimalToUser, saveAnimal, saveAnimalImage } from "../Providers/AnimalProvider";
 import { Animal, AnimalImage } from "../Models/structures/Animal.dto";
-import { User, UserAnimallink } from "../Models/structures";
+import { User } from "../Models/structures";
 import { ServerResponse } from "../Models/structures/Responses";
+import { UserAnimallink } from "../Models/structures/UserAnimal.dto";
 @JsonController("/animals")
 export class AnimalController {
   @Post("")

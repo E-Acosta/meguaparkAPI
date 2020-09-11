@@ -2,9 +2,10 @@ import { File } from "../Models/interfaces/IFile";
 import { AnimalModel } from "../Models/schemas/Animal.schema";
 import { AnimalImagesModel } from "../Models/schemas/AnimalImage.schema";
 import { UserAnimalsModel } from "../Models/schemas/UserAnimals.schema";
-import { User, UserAnimallink } from "../Models/structures";
+import { User } from "../Models/structures";
 import { Animal, AnimalImage } from "../Models/structures/Animal.dto";
 import { ServerResponse } from "../Models/structures/Responses";
+import { UserAnimallink } from "../Models/structures/UserAnimal.dto";
 
 export async function saveAnimal(animal: Animal, file: File) {
   if (file) {
@@ -112,5 +113,5 @@ export async function getAnimalsLinked(user: User) {
   })
   console.log('ENCONTRADOS')
   console.dir(animalsFounds)
-  return new ServerResponse(200, "Success",{founds:animalsFounds,notFounsYet:animalsNotFounds,total:animalsFounds.length+animalsNotFounds.length});
+  return new ServerResponse(200, "Success",{founds:animalsFounds,notFoundsYet:animalsNotFounds,total:animalsFounds.length+animalsNotFounds.length});
 }
