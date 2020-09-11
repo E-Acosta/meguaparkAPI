@@ -17,7 +17,7 @@ export const AnimalSchema = new mongoose.Schema<IAnimal>({
         trim:true
     },
     size: {
-        type:Number,
+        type:String,
         trim:true
     },
     info:{
@@ -25,7 +25,7 @@ export const AnimalSchema = new mongoose.Schema<IAnimal>({
         trim:true
     },
     type:{
-        type:String,
+        type:Number,
         trim:true
     },
     imagePath: {
@@ -33,4 +33,4 @@ export const AnimalSchema = new mongoose.Schema<IAnimal>({
         trim:true
     },
 })
-export const UserModel = mongoose.model<IAnimal>("Animal", AnimalSchema);
+export const AnimalModel = mongoose.model<IAnimal>("Animal", AnimalSchema);

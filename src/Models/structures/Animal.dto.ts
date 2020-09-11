@@ -1,15 +1,6 @@
-import { IsString, IsOptional, IsNotEmpty, /*IsDateString,*/ IsMongoId, IsNumber } from 'class-validator';
+import { IsString, IsOptional, IsNotEmpty, IsMongoId, IsNumberString, } from 'class-validator';
 import { IAnimal } from '../interfaces/IAnimal';
 export class Animal {
-    /*
-    name: string;
-    nameEN: string;
-    sciName: string;
-    tamaño: number;
-    info:string;
-    type:number;
-    imagePath: string;
-    */
     @IsMongoId()
     @IsOptional()
     id: string
@@ -33,12 +24,13 @@ export class Animal {
     @IsOptional()
     imagePath:string
 
-    @IsNumber()
-    @IsOptional()
-    size: number
+    @IsString()
+    @IsNotEmpty()
+    size: string
 
-    @IsNumber()
-    @IsOptional()
+    // 1: bird, 2: Mamiferos, 3:Herpetos
+    @IsNumberString()
+    @IsNotEmpty()
     type: number
 
     constructor (animal:IAnimal){

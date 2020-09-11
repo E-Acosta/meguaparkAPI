@@ -22,5 +22,5 @@ export const usersProfileMulterConfig = multer({
     storage:  multerS3Config('meguapark/profileImages'),
 });
 export const animalsProfileMulterConfig = multer({
-    storage:  multerS3Config('meguapark/profileImages'),
+    storage:  multerS3Config('meguapark/animalImages'),
 });
