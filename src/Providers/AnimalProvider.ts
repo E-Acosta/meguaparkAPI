@@ -23,20 +23,6 @@ export async function saveAnimal(animal: Animal, file: File) {
   }
   export async  function getAnimalImages(animalId:string){
   console.log(`BUSCANDO ID:${animalId}`)
-  // let animalImagesDocs: AnimalImage[]
-  //  AnimalImagesModel.find({animalId:animalId},'-_V -animalId',(err,animalImages)=>{
-  //     if(!err){
-  //       animalImagesDocs=animalImages.map((animalImage)=>{
-  //         const doc = new AnimalImage(animalImage)
-  //         console.log("Encontrado")
-  //         console.dir(doc)
-  //         return doc
-  //       })
-  //     }else{
-  //       return []
-  //     }
-  //   })
-  //   return animalImagesDocs
     return await AnimalImagesModel.find({animalId:animalId}).select('-_V -animalId').then((animalImages)=>{
       const animalImagesDocs=animalImages.map((animalImage)=>{
         const doc = new AnimalImage(animalImage)

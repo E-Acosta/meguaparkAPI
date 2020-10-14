@@ -7,4 +7,4 @@ services:
             - "3000:3000"
         env_file: 
             - ".env"
-        image: everacosta/meguapark_api:0.1
+        image: everacosta/meguapark_api:0.3
