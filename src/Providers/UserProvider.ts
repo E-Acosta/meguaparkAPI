@@ -6,6 +6,8 @@ import { User } from "../Models/structures";
 import { ServerResponse } from "../Models/structures/Responses";
 import { sign } from "jsonwebtoken";
 import { configENV } from "../Config/env";
+import { UpdateUser } from "../Models/structures/updateUser.dto";
+
 const hashSalt: number = 10;
 
 export async function saveUser(user: User, file: File) {
@@ -56,4 +58,43 @@ export async function getUserInfo(id: String) {
   );
   const user = new User(userDoc);
   return user;
+}
+export async function updateUserInfo(
+  id: String,
+  newUserData: UpdateUser,
+  file: File
+) {
+  let userDoc = await UserModel.findOne({ _id: id });
+  newUserData.image = file
+    ? file.location
+      ? file.location
+      : userDoc.image
+    : userDoc.image;
+  if (newUserData.password) {
+    if (!newUserData.passwordOld) {
+      return new ServerResponse(
+        400,
+        "Para cambiar tu contraseña debes colocar tu antigua contraseña"
+      );
+    } else {
+      if (!compareSync(newUserData.passwordOld, userDoc.password)) {
+        return new ServerResponse(
+          400,
+          "La contraseña digitada no coincide con tu contraseña actual"
+        );
+      }else{
+        newUserData.password= hashSync(newUserData.password, hashSalt);
+      }
+    }
+  }
+
+  try {
+    await userDoc.updateOne(newUserData);
+    return new ServerResponse(200, "Sucess", {
+      message: "User Update Success",
+    });
+  } catch (error) {
+    console.log(error);
+    return new ServerResponse(500, "ERROR :C");
+  }
 }
