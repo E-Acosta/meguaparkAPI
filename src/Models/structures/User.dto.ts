@@ -37,7 +37,6 @@ export class User {
 
     constructor (user:IUser){
         if(user){
-            console.dir(user)
             this.id=user._id.toString()
             this.name=user.name
             this.lastname=user.lastname

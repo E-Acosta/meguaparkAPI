@@ -16,7 +16,18 @@ export interface IFile {
     etag: string;
     versionId?: undefined;
   }
-  
+  export interface File extends Express.Multer.File {
+    bucket: string;
+    key: string;
+    acl: string;
+    contentType: string;
+    contentDisposition: null;
+    storageClass: string;
+    serverSideEncryption: null;
+    metadata: any;
+    location: string;
+    etag: string;
+}
   interface Metadata {
     fieldName: string;
   }
