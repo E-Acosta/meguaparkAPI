@@ -24,6 +24,24 @@ export async function saveAnimal(animal: Animal, file: File) {
     return new ServerResponse(400, "THE ANIMAL MUST BE HAVE AN IMAGE")
   }
 }
+export async function add3dModel(id:string,file:File){
+  let animalDoc = await AnimalModel.findOne({ _id: id });
+  if(file){
+    animalDoc.modelPath=file.location
+    console.dir(file)
+    console.log("---------------")
+    console.dir(animalDoc)
+  }
+  try {
+    await animalDoc.save();
+    return new ServerResponse(200, "Sucess", {
+      message: "Model Added successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    return new ServerResponse(500, "ERROR :C");
+  }
+}
 export async function getAnimalImages(animalId: string) {
   console.log(`BUSCANDO ID:${animalId}`)
   return await AnimalImagesModel.find({ animalId: animalId }).select('-_V -animalId').then((animalImages) => {

@@ -1,15 +1,15 @@
-import { animalsProfileMulterConfig } from "../Config/multer";
+import { animalsModelMulterConfig, animalsProfileMulterConfig } from "../Config/multer";
 import {
   Body,
   Post,
   UploadedFile,
   JsonController,
   Get,
-  Put, Authorized, CurrentUser
+  Put, Authorized, CurrentUser, Param
 } from "routing-controllers";
 import { login } from "../Providers/UserProvider";
 import { File } from "../Models/interfaces";
-import { getAnimals, getAnimalsLinked, linkAnimalToUser, saveAnimal, saveAnimalImage } from "../Providers/AnimalProvider";
+import { add3dModel, getAnimals, getAnimalsLinked, linkAnimalToUser, saveAnimal, saveAnimalImage } from "../Providers/AnimalProvider";
 import { Animal, AnimalImage } from "../Models/structures/Animal.dto";
 import { User } from "../Models/structures";
 import { ServerResponse } from "../Models/structures/Responses";
@@ -58,5 +58,11 @@ export class AnimalController {
       return new ServerResponse(400, "USER NOT EXITS");
     }
   }
-
+  @Put("/3d/:id")
+  add3d(
+    @Param("id") id: string,
+    @UploadedFile("model", { options: animalsModelMulterConfig }) file: File
+  ){
+    return add3dModel(id,file)
+  }
 }

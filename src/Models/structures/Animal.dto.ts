@@ -42,6 +42,9 @@ export class Animal {
     @IsOptional()
     imagePath:string
 
+    @IsOptional()
+    modelPath:string
+
     @IsString()
     @IsNotEmpty()
     size: string
@@ -63,6 +66,7 @@ export class Animal {
             this.size=animal.size
             this.type=animal.type
             this.imagePath=animal.imagePath
+            this.modelPath=animal.modelPath
             this.info=animal.info
             this.images=[]
             console.dir(this)

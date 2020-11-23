@@ -32,5 +32,9 @@ export const AnimalSchema = new mongoose.Schema<IAnimal>({
         type:String,
         trim:true
     },
+    modelPath: {
+        type:String,
+        trim:true
+    },
 })
 export const AnimalModel = mongoose.model<IAnimal>("Animal", AnimalSchema);
