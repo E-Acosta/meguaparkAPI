@@ -133,3 +133,7 @@ export async function getAnimalsLinked(user: User) {
   console.dir(animalsFounds)
   return new ServerResponse(200, "Success",{founds:animalsFounds,notFoundsYet:animalsNotFounds,total:animalsFounds.length+animalsNotFounds.length});
 }
+
+export async function deleteAnimal(id:string){
+  return await AnimalModel.findByIdAndDelete(id)
+}

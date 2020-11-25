@@ -5,11 +5,11 @@ import {
   UploadedFile,
   JsonController,
   Get,
-  Put, Authorized, CurrentUser, Param
+  Put, Authorized, CurrentUser, Param, Delete
 } from "routing-controllers";
 import { login } from "../Providers/UserProvider";
 import { File } from "../Models/interfaces";
-import { add3dModel, getAnimals, getAnimalsLinked, linkAnimalToUser, saveAnimal, saveAnimalImage } from "../Providers/AnimalProvider";
+import { add3dModel, deleteAnimal, getAnimals, getAnimalsLinked, linkAnimalToUser, saveAnimal, saveAnimalImage } from "../Providers/AnimalProvider";
 import { Animal, AnimalImage } from "../Models/structures/Animal.dto";
 import { User } from "../Models/structures";
 import { ServerResponse } from "../Models/structures/Responses";
@@ -64,5 +64,15 @@ export class AnimalController {
     @UploadedFile("model", { options: animalsModelMulterConfig }) file: File
   ){
     return add3dModel(id,file)
+  }
+  @Delete("/:id")
+  async deleteAnimal(@Param("id") id: string){
+    try {
+      await deleteAnimal(id)
+      return new ServerResponse(200,"Animal Eliminado")
+    } catch (error) {
+      console.log(error)
+      return new ServerResponse(400,"ANIMAL NOT EXITS");
+    }
   }
 }
