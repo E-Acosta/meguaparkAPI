@@ -24,10 +24,28 @@ export async function saveAnimal(animal: Animal, file: File) {
     return new ServerResponse(400, "THE ANIMAL MUST BE HAVE AN IMAGE")
   }
 }
-export async function add3dModel(id:string,file:File){
+export async function updateAnimal(animal: Animal, file: File, id: string) {
+  let animalDoc = await AnimalModel.findOne({ _id: id })
+  animalDoc.name = animal.name ? animal.name : animalDoc.name
+  animalDoc.nameEN = animal.nameEN ? animal.nameEN : animalDoc.nameEN
+  animalDoc.sciName = animal.sciName ? animal.sciName : animalDoc.sciName
+  animalDoc.size = animal.size ? animal.size : animalDoc.size
+  animalDoc.info = animal.info ? animal.info : animalDoc.info
+  animalDoc.imagePath = file ? file.location : animalDoc.imagePath;
+  return await animalDoc
+    .save()
+    .then(() => {
+      return new ServerResponse(201, "Animal updated");
+    })
+    .catch((error) => {
+      console.dir(error);
+      return new ServerResponse(500, `${error}`);
+    });
+}
+export async function add3dModel(id: string, file: File) {
   let animalDoc = await AnimalModel.findOne({ _id: id });
-  if(file){
-    animalDoc.modelPath=file.location
+  if (file) {
+    animalDoc.modelPath = file.location
     console.dir(file)
     console.log("---------------")
     console.dir(animalDoc)
@@ -131,9 +149,9 @@ export async function getAnimalsLinked(user: User) {
   })
   console.log('ENCONTRADOS')
   console.dir(animalsFounds)
-  return new ServerResponse(200, "Success",{founds:animalsFounds,notFoundsYet:animalsNotFounds,total:animalsFounds.length+animalsNotFounds.length});
+  return new ServerResponse(200, "Success", { founds: animalsFounds, notFoundsYet: animalsNotFounds, total: animalsFounds.length + animalsNotFounds.length });
 }
 
-export async function deleteAnimal(id:string){
+export async function deleteAnimal(id: string) {
   return await AnimalModel.findByIdAndDelete(id)
 }
