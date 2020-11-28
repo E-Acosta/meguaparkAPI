@@ -8,7 +8,8 @@ import { getUser, isAuthorized } from "./Middlewares";
 const app = createExpressServer({
    controllers: [UserController,AnimalController],
    authorizationChecker: isAuthorized,
-   currentUserChecker: getUser
+   currentUserChecker: getUser,
+   cors:{origin: '*'}
 });
 
 // run express application on port 3000
