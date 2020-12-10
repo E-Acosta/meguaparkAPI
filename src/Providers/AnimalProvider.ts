@@ -1,4 +1,5 @@
 import { File } from "../Models/interfaces/IFile";
+import { UserModel } from "../Models/schemas";
 import { AnimalModel } from "../Models/schemas/Animal.schema";
 import { AnimalImagesModel } from "../Models/schemas/AnimalImage.schema";
 import { UserAnimalsModel } from "../Models/schemas/UserAnimals.schema";
@@ -110,6 +111,10 @@ export async function linkAnimalToUser(link: UserAnimallink) {
   const userAnimalModel = new UserAnimalsModel(link);
   const linkExist = await UserAnimalsModel.findOne({ key: link.key })
   if (!linkExist) {
+    let userDoc = await UserModel.findOne({ _id: link.userId });
+    userDoc.xp+=40;
+    userDoc.level=Math.trunc(userDoc.xp/100);
+    await userDoc.save().then();
     return await userAnimalModel.save().then(() => {
       return new ServerResponse(200, "New Animal find successfully");
     }).catch((error) => {
