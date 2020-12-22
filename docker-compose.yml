@@ -5,6 +5,22 @@ services:
         build: .
         ports: 
             - "3000:3000"
+        expose:
+            - "3000"
+        environment:
+            - VIRTUAL_HOST=apimegua.everacosta.com
+            - LETSENCRYPT_HOST=apimegua.everacosta.com
+            - VIRTUAL_POR=3000
         env_file: 
             - ".env"
         image: everacosta/meguapark_api:0.8
+        networks:
+            - u-network
+            - proxy-net
+networks:
+  u-network:
+    external:
+      name: u-network
+  proxy-net:
+    external:
+      name: proxy-net
