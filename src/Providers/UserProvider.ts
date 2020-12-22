@@ -87,9 +87,8 @@ export async function updateUserInfo(
       }
     }
   }
-
   try {
-    await userDoc.updateOne(newUserData);
+    await userDoc.updateOne({...newUserData,...{birthdate:new Date(newUserData.birthdate)}});
     return new ServerResponse(200, "Sucess", {
       message: "User Update Success",
     });

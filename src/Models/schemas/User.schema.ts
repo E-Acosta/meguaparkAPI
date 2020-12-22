@@ -14,7 +14,6 @@ export const UsersSchema = new mongoose.Schema<IUser>(
     email:{
         type: String,
         required:[true,'EMAIL_IS_REQUIRED'],
-        trim:true,
         unique:[true,'THIS EMAIL IS IN USE']
     },
     password:{

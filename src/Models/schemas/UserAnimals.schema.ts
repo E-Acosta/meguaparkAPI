@@ -14,12 +14,10 @@ export const UserAnimalsSchema = new mongoose.Schema<IAnimal>({
         required: true,
     },
     method: {
-        type:String,
-        trim:true
+        type:String
     },
     key:{
         type:String,
-        trim:true,
         unique:[true,'THIS ANIMAL IS ALREADY LINKED']
     }
 })
